@@ -122,7 +122,8 @@ let rec fmt =
     | Mul (e1,e2) -> $"({fmt e1} * {fmt e2})"
 
 let formatted = fmt ae3
-    
+  
+// 1.2.4    
 let rec simplify =
     function
     | CstI e1 -> CstI e1
