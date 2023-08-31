@@ -123,5 +123,27 @@ let rec fmt =
 
 let formatted = fmt ae3
     
-    
-    
+let rec simplify =
+    function
+    | CstI e1 -> CstI e1
+    | Var e -> Var e
+    | Add (e1,e2) ->
+        match (simplify e1 , simplify e2) with
+        | e1, CstI 0 -> e1
+        | CstI 0, e2 -> e2
+        | e1, e2 -> Add (e1, e2)
+    | Sub (e1,e2) ->
+        match (simplify e1 , simplify e2) with
+        | e1, CstI 0 -> e1
+        | e1, e2 when e1 = e2 -> CstI 0
+        | e1, e2 -> Sub (e1, e2)
+    | Mul (e1,e2) ->
+        match (simplify e1 , simplify e2) with
+        | _, CstI 0 -> CstI 0
+        | CstI 0, _ -> CstI 0
+        | e1, CstI 1-> e1
+        | CstI 1, e2 -> e2
+        | e1, e2 -> Mul (e1, e2)  
+ 
+ 
+let simplifytest = simplify (Mul( Add(CstI 1,CstI 0), Add(Var "x",CstI 0)))   
