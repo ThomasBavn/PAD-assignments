@@ -1,4 +1,4 @@
-module Intro2 
+module Intro2
 
 (* Programming language concepts for software developers, 2010-08-28 *)
 
@@ -122,8 +122,8 @@ let rec fmt =
     | Mul (e1,e2) -> $"({fmt e1} * {fmt e2})"
 
 let formatted = fmt ae3
-  
-// 1.2.4    
+
+// 1.2.4
 let rec simplify =
     function
     | CstI e1 -> CstI e1
@@ -144,7 +144,22 @@ let rec simplify =
         | CstI 0, _ -> CstI 0
         | e1, CstI 1-> e1
         | CstI 1, e2 -> e2
-        | e1, e2 -> Mul (e1, e2)  
- 
- 
-let simplifytest = simplify (Mul( Add(CstI 1,CstI 0), Add(Var "x",CstI 0)))   
+        | e1, e2 -> Mul (e1, e2)
+
+
+let simplifytest = simplify (Mul( Add(CstI 1,CstI 0), Add(Var "x",CstI 0)))
+
+// 1.2.5
+let rec differentiate x e =
+    match x with
+    | Var v ->
+        match e with
+        | CstI _ -> CstI 0
+        | Var x when x = v -> CstI 1
+        | Var _ -> CstI 0
+        | Add (e1, e2) -> Add (differentiate (Var v) e1, differentiate (Var v) e2)
+        | Sub (e1, e2) -> Sub (differentiate (Var v) e1, differentiate (Var v) e2)
+        | Mul (e1, e2) -> Add (Mul (differentiate (Var v) e1, e2), Mul(e1, differentiate (Var v) e2))
+    | _ -> failwith "wtf bro"
+
+let difftest = differentiate (Var "x") (Add (Var "x", Var "y"))
