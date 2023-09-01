@@ -18,4 +18,9 @@ public class CstI : Expr
     {
         return Value;
     }
+
+    public override Expr Simplify()
+    {
+        return this;
+    }
 }

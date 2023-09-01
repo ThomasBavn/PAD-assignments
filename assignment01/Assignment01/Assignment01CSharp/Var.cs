@@ -18,4 +18,9 @@ public class Var : Expr
     {
         return env[Name];
     }
+
+    public override Expr Simplify()
+    {
+        return this;
+    }
 }

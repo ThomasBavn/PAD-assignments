@@ -18,6 +18,10 @@ public static class Program
         Expr e3 = new Add(new Var("u"), new Mul(new Add(new CstI(6), new CstI(3)), new Var("i")));
         Console.WriteLine("Expression 3: {0}", e3);
 
+        // 1.4.4
 
+        Expr expressionToBeSimplified = new Sub(new Mul(new Add(new CstI(30), new CstI(0)), new CstI(1)), new CstI(0));
+        Console.WriteLine("Before: {0}", expressionToBeSimplified);
+        Console.WriteLine("After: {0}", expressionToBeSimplified.Simplify());
     }
 }
