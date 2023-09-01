@@ -13,4 +13,9 @@ public class Var : Expr
     {
         return Name;
     }
+
+    public override int Eval(Dictionary<string, int> env)
+    {
+        return env[Name];
+    }
 }

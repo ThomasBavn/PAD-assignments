@@ -7,4 +7,8 @@ public class Mul : Binop
     }
 
     protected override char Symbol => '*';
+    public override int Eval(Dictionary<string,int> env)
+    {
+        return Left.Eval(env) * Right.Eval(env);
+    }
 }

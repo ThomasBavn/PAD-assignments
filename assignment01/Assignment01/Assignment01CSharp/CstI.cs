@@ -13,4 +13,9 @@ public class CstI : Expr
     {
         return Value.ToString();
     }
+
+    public override int Eval(Dictionary<string, int> env)
+    {
+        return Value;
+    }
 }
