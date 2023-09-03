@@ -262,6 +262,7 @@ let rec getindex vs x =
 
 (* Compiling from expr to texpr *)
 
+(*
 let rec tcomp (e : expr) (cenv : string list) : texpr =
     match e with
     | CstI i -> TCstI i
@@ -270,6 +271,24 @@ let rec tcomp (e : expr) (cenv : string list) : texpr =
       let cenv1 = x :: cenv 
       TLet(tcomp erhs cenv, tcomp ebody cenv1)
     | Prim(ope, e1, e2) -> TPrim(ope, tcomp e1 cenv, tcomp e2 cenv);;
+*)
+    
+//2.3    
+let rec tcomp2 (e : expr) (cenv : string list) : texpr =
+    match e with
+    | CstI i -> TCstI i
+    | Var x  -> TVar (getindex cenv x)
+    | Let(expressions, ebody) ->
+      match expressions with
+      | [] -> tcomp2 ebody cenv
+      | (x, erhs)::xs ->
+        let cenv1 = x :: cenv 
+        TLet(tcomp2 erhs cenv, tcomp2 (Let(xs,ebody)) cenv1)
+    | Prim(ope, e1, e2) -> TPrim(ope, tcomp2 e1 cenv, tcomp2 e2 cenv);;
+    
+let testexpression2 = Let([ ("x",Prim("+",CstI 42,CstI 3)) ; ("r",Prim( "-",Var "x", CstI 43)) ; ("y",CstI 2)], Prim("+",Var "x",Var "r"))
+
+let tcomptest = tcomp2 testexpression2 []
 
 (* Evaluation of target expressions with variable indexes.  The
    run-time environment renv is a list of variable values (ints).  *)
@@ -286,6 +305,9 @@ let rec teval (e : texpr) (renv : int list) : int =
     | TPrim("*", e1, e2) -> teval e1 renv * teval e2 renv
     | TPrim("-", e1, e2) -> teval e1 renv - teval e2 renv
     | TPrim _            -> failwith "unknown primitive";;
+    
+    
+let evaltcomp = teval tcomptest []
 
 (* Correctness: eval e []  equals  teval (tcomp e []) [] *)
 
