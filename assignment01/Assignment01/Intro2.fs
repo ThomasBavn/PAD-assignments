@@ -45,6 +45,7 @@ let e7 = Prim("==", CstI 23, CstI 26)
 
 (* Evaluation within an environment *)
 
+// Exercise  1.1.1
 let rec eval e (env: (string * int) list) : int =
     match e with
     | CstI i -> i
@@ -57,7 +58,7 @@ let rec eval e (env: (string * int) list) : int =
     | Prim("+", e1, e2) -> eval e1 env + eval e2 env
     | Prim("*", e1, e2) -> eval e1 env * eval e2 env
     | Prim("-", e1, e2) -> eval e1 env - eval e2 env
-    | Prim("max", e1, e2) -> max (eval e1 env) (eval e2 env) // 1.1.1 and down
+    | Prim("max", e1, e2) -> max (eval e1 env) (eval e2 env) 
     | Prim("min", e1, e2) -> min (eval e1 env) (eval e2 env)
     | Prim("==", e1, e2) -> if (eval e1 env) = (eval e2 env) then 1 else 0
     | Prim _ -> failwith "unknown primitive"
@@ -67,7 +68,7 @@ let e2v1 = eval e2 env
 let e2v2 = eval e2 [ ("a", 314) ]
 let e3v = eval e3 env
 
-//1.1.2
+// Exercise 1.1.2
 let maxTest = eval e4 env
 
 let minTest = eval e5 env
@@ -75,7 +76,7 @@ let minTest = eval e5 env
 let eqTestTrue = eval e6 env
 let eqTestFalse = eval e7 env
 
-// 1.1.3
+// Exercise 1.1.3
 let rec evalPrim e (env: (string * int) list) : int =
     match e with
     | CstI i -> i
@@ -97,7 +98,7 @@ let rec evalPrim e (env: (string * int) list) : int =
         | "==" -> if i1 = i2 then 1 else 0
         | _ -> failwith "unknown primitive"
 
-// 1.2.1
+// Exercise 1.2.1
 type aexpr =
     | CstI of int
     | Var of string
@@ -105,14 +106,14 @@ type aexpr =
     | Sub of aexpr * aexpr
     | Mul of aexpr * aexpr
 
-// 1.2.2
+// Exercise 1.2.2
 let ae1 = Sub(Var "v",Add(Var "w", Var "z")) // v-(w+z)
 
 let ae2 = Mul(CstI 2,Sub(Var "v",Add(Var "w",Var "z"))) // 2 * (v-(w+z))
 
 let ae3 = Add(Var "x",Add(Var "y", Add(Var "z",Var "v"))) // x+y+z+v
 
-// 1.2.3
+// Exercise 1.2.3
 let rec fmt =
     function
     | CstI e1 -> e1.ToString()
@@ -123,7 +124,7 @@ let rec fmt =
 
 let formatted = fmt ae3
 
-// 1.2.4
+// Exercise 1.2.4
 let rec simplify =
     function
     | CstI e1 -> CstI e1
@@ -149,7 +150,7 @@ let rec simplify =
 
 let simplifytest = simplify (Mul( Add(CstI 1,CstI 0), Add(Var "x",CstI 0)))
 
-// 1.2.5
+// Exercise 1.2.5
 let rec differentiate x e =
     match x with
     | Var v ->

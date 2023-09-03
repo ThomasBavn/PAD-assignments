@@ -25,7 +25,7 @@ let rec lookup env x =
     | []        -> failwith (x + " not found")
     | (y, v)::r -> if x=y then v else lookup r x;;
     
-//2.1.1
+// Exercise 2.1
 let rec eval e (env : (string * int) list) : int =
     match e with
     | CstI i            -> i
@@ -201,32 +201,21 @@ let rec minus (xs, ys) =
 
 (* Find all variables that occur free in expression e *)
 
-(*
+// Exercise 2.2   
 let rec freevars e : string list =
-    match e with
-    | CstI i -> []
-    | Var x  -> [x]
-    | Let(x, erhs, ebody) -> 
-          union (freevars erhs, minus (freevars ebody, [x]))
-    | Prim(ope, e1, e2) -> union (freevars e1, freevars e2);;
-    
-  *)  
-
-//2.2   
-let rec freevars2 e : string list =
     match e with
     | CstI i -> []
     | Var x  -> [x]
     | Let(expressions, ebody) ->
           match expressions with
-          | [] -> freevars2 ebody
-          | (x, erhs)::xr -> union (freevars2 erhs, minus (freevars2 (Let(xr,ebody)) , [x]))
-    | Prim(ope, e1, e2) -> union (freevars2 e1, freevars2 e2);;
+          | [] -> freevars ebody
+          | (x, erhs)::xr -> union (freevars erhs, minus (freevars (Let(xr,ebody)) , [x]))
+    | Prim(ope, e1, e2) -> union (freevars e1, freevars e2);;
     
     
 let testexpression = Let([ ("x",Prim("+",CstI 42,CstI 3)) ; ("r",Prim( "-",Var "r", CstI 43)) ; ("y",CstI 2)], Prim("+",Var "x",Var "z")) 
  
-let testfreevars = freevars2 testexpression
+let testfreevars = freevars testexpression
 
 (* Alternative definition of closed *)
 
@@ -262,33 +251,24 @@ let rec getindex vs x =
 
 (* Compiling from expr to texpr *)
 
-(*
-let rec tcomp (e : expr) (cenv : string list) : texpr =
-    match e with
-    | CstI i -> TCstI i
-    | Var x  -> TVar (getindex cenv x)
-    | Let(x, erhs, ebody) -> 
-      let cenv1 = x :: cenv 
-      TLet(tcomp erhs cenv, tcomp ebody cenv1)
-    | Prim(ope, e1, e2) -> TPrim(ope, tcomp e1 cenv, tcomp e2 cenv);;
-*)
+
     
-//2.3    
-let rec tcomp2 (e : expr) (cenv : string list) : texpr =
+// Exercise 2.3    
+let rec tcomp (e : expr) (cenv : string list) : texpr =
     match e with
     | CstI i -> TCstI i
     | Var x  -> TVar (getindex cenv x)
     | Let(expressions, ebody) ->
       match expressions with
-      | [] -> tcomp2 ebody cenv
+      | [] -> tcomp ebody cenv
       | (x, erhs)::xs ->
         let cenv1 = x :: cenv 
-        TLet(tcomp2 erhs cenv, tcomp2 (Let(xs,ebody)) cenv1)
-    | Prim(ope, e1, e2) -> TPrim(ope, tcomp2 e1 cenv, tcomp2 e2 cenv);;
+        TLet(tcomp erhs cenv, tcomp (Let(xs,ebody)) cenv1)
+    | Prim(ope, e1, e2) -> TPrim(ope, tcomp e1 cenv, tcomp e2 cenv);;
     
 let testexpression2 = Let([ ("x",Prim("+",CstI 42,CstI 3)) ; ("r",Prim( "-",Var "x", CstI 43)) ; ("y",CstI 2)], Prim("+",Var "x",Var "r"))
 
-let tcomptest = tcomp2 testexpression2 []
+let tcomptest = tcomp testexpression2 []
 
 (* Evaluation of target expressions with variable indexes.  The
    run-time environment renv is a list of variable values (ints).  *)
