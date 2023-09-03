@@ -56,10 +56,14 @@ let res = List.map run [e1;e2;e3;e4;e5;e7]  (* e6 has free variables *)
 
 // let mem x vs = List.exists (fun y -> x=y) vs;;
 
+*)
+
 let rec mem x vs = 
     match vs with
     | []      -> false
     | v :: vr -> x=v || mem x vr;;
+    
+    (*
 
 (* Checking whether an expression is closed.  The vs is 
    a list of the bound variables.  *)
@@ -172,6 +176,7 @@ let e9s1a = subst e9 [("y", Var "z")];;
 
 (* ---------------------------------------------------------------------- *)
 
+*)
 (* Free variables *)
 
 (* Operations on sets, represented as lists.  Simple but inefficient;
@@ -196,6 +201,7 @@ let rec minus (xs, ys) =
 
 (* Find all variables that occur free in expression e *)
 
+(*
 let rec freevars e : string list =
     match e with
     | CstI i -> []
@@ -203,16 +209,42 @@ let rec freevars e : string list =
     | Let(x, erhs, ebody) -> 
           union (freevars erhs, minus (freevars ebody, [x]))
     | Prim(ope, e1, e2) -> union (freevars e1, freevars e2);;
+    
+  *)  
+
+//2.2   
+let rec freevars2 e : string list =
+    match e with
+    | CstI i -> []
+    | Var x  -> [x]
+    | Let(expressions, ebody) ->
+          match expressions with
+          | [] -> freevars2 ebody
+          | (x, erhs)::xr -> union (freevars2 erhs, minus (freevars2 (Let(xr,ebody)) , [x]))
+    | Prim(ope, e1, e2) -> union (freevars2 e1, freevars2 e2);;
+    
+    
+let testexpression = Let([ ("x",Prim("+",CstI 42,CstI 3)) ; ("r",Prim( "-",Var "r", CstI 43)) ; ("y",CstI 2)], Prim("+",Var "x",Var "z")) 
+ 
+let testfreevars = freevars2 testexpression
 
 (* Alternative definition of closed *)
 
-let closed2 e = (freevars e = []);;
-let _ = List.map closed2 [e1;e2;e3;e4;e5;e6;e7;e8;e9;e10]
+(*
 
+let closed2 e = (freevars e = []);;
+//let _ = List.map closed2 [e1;e2;e3;e4;e5;e6;e7;e8;e9;e10]
+
+*)
+
+
+(*
 (* ---------------------------------------------------------------------- *)
 
 (* Compilation to target expressions with numerical indexes instead of
    symbolic variable names.  *)
+   
+   *)
 
 type texpr =                            (* target expressions *)
   | TCstI of int
@@ -257,6 +289,7 @@ let rec teval (e : texpr) (renv : int list) : int =
 
 (* Correctness: eval e []  equals  teval (tcomp e []) [] *)
 
+(*
 
 (* ---------------------------------------------------------------------- *)
 
