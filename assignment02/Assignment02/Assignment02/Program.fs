@@ -1,4 +1,5 @@
-﻿open Intcomp1
+﻿open System
+open Intcomp1
 
 let sinstrToInt sinstr =
     match sinstr with
@@ -17,7 +18,6 @@ let rec assemble lst =
 
 
 let test = assemble (scomp e1 [])    
-    
-    
-    
-    
+List.map (fun x-> printfn "%i" x) test
+
+intsToFile (assemble (scomp e1 [])) "is1.txt";
