@@ -15,6 +15,25 @@ type expr =
 
 (* Some closed expressions: *)
 
+let e1 = Let([("z", CstI 17);("x", Prim("+", CstI 3, Var "z" ))], Prim("+", Var "z", Var "z"));;
+
+
+let e2 = Let([("z", CstI 17)], 
+             Prim("+", Let([("z", CstI 22)], Prim("*", CstI 100, Var "z")),
+                       Var "z"));;
+
+(*
+
+let e3 = Let("z", Prim("-", CstI 5, CstI 4), 
+             Prim("*", CstI 100, Var "z"));;
+
+let e4 = Prim("+", Prim("+", CstI 20, Let("z", CstI 17, 
+                                          Prim("+", Var "z", CstI 2))),
+                   CstI 30);;
+
+let e5 = Prim("*", CstI 2, Let("x", CstI 3, Prim("+", Var "x", CstI 4)));;
+*)
+
 
 (* ---------------------------------------------------------------------- *)
 
@@ -295,6 +314,9 @@ let evaltcomp = teval tcomptest []
 
 (* ---------------------------------------------------------------------- *)
 
+
+*)
+
 (* Stack machines *)
 
 (* Stack machine instructions.  An expressions in postfix or reverse
@@ -375,6 +397,7 @@ type stackvalue =
 
 (* Compilation to a list of instructions for a unified-stack machine *)
 
+(*
 let rec scomp (e : expr) (cenv : stackvalue list) : sinstr list =
     match e with
     | CstI i -> [SCstI i]
@@ -388,11 +411,35 @@ let rec scomp (e : expr) (cenv : stackvalue list) : sinstr list =
     | Prim("*", e1, e2) -> 
           scomp e1 cenv @ scomp e2 (Value :: cenv) @ [SMul] 
     | Prim _ -> failwith "scomp: unknown operator";;
+    *)
+    
+    
+    
+let rec scomp (e : expr) (cenv : stackvalue list) : sinstr list =
+    match e with
+    | CstI i -> [SCstI i]
+    | Var x  -> [SVar (getindex cenv (Bound x))]
+    | Let( expressions, ebody) -> 
+          match expressions with
+          | [] -> scomp ebody cenv 
+          | (x, erhs)::xs -> scomp erhs cenv @ scomp (Let(xs,ebody)) (Bound x :: cenv) @ [SSwap; SPop]
+    | Prim("+", e1, e2) -> 
+          scomp e1 cenv @ scomp e2 (Value :: cenv) @ [SAdd] 
+    | Prim("-", e1, e2) -> 
+          scomp e1 cenv @ scomp e2 (Value :: cenv) @ [SSub] 
+    | Prim("*", e1, e2) -> 
+          scomp e1 cenv @ scomp e2 (Value :: cenv) @ [SMul] 
+    | Prim _ -> failwith "scomp: unknown operator";;    
+
 
 let s1 = scomp e1 [];;
+
 let s2 = scomp e2 [];;
+
+(*
 let s3 = scomp e3 [];;
 let s5 = scomp e5 [];;
+*)
 
 (* Output the integers in list inss to the text file called fname: *)
 
@@ -400,5 +447,5 @@ let intsToFile (inss : int list) (fname : string) =
     let text = String.concat " " (List.map string inss)
     System.IO.File.WriteAllText(fname, text);;
 
+
 (* -----------------------------------------------------------------  *)
-*)
