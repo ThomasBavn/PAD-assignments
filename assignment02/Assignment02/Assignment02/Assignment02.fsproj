@@ -8,6 +8,11 @@
     <ItemGroup>
         <Compile Include="Intcomp1.fs" />
         <Compile Include="Program.fs" />
+        <Content Include="HelloLex\FSharp.Core.dll" />
+        <Content Include="HelloLex\FsLexYacc.Runtime.dll" />
+        <Content Include="HelloLex\hello.exe" />
+        <Compile Include="HelloLex\hello.fs" />
+        <Content Include="HelloLex\hello.fsl" />
     </ItemGroup>
 
     <ItemGroup>
