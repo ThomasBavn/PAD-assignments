@@ -12,6 +12,8 @@
         <Content Include="HelloLex\FsLexYacc.Runtime.dll" />
         <Content Include="HelloLex\hello.exe" />
         <Compile Include="HelloLex\hello.fs" />
+        <Content Include="HelloLex\hello2.fsl" />
+        <Content Include="HelloLex\hello3.fsl" />
         <Content Include="HelloLex\hello.fsl" />
     </ItemGroup>
 
