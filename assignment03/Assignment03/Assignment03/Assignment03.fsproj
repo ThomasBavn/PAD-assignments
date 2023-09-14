@@ -11,8 +11,4 @@
         <Content Include="HelloLex\hello.fsl" />
     </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="FsLexYacc" Version="11.2.0" />
-    </ItemGroup>
-
 </Project>
