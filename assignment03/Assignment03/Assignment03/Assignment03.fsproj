@@ -9,14 +9,14 @@
         <Compile Include="Intcomp1.fs" />
         <Compile Include="Program.fs" />
         <Content Include="HelloLex\hello.fsl" />
-        <Content Include="Absyn.fs" />
-        <Content Include="Parse.fs" />
-        <Content Include="Expr.fs" />
-        <Content Include="ExprLex.fs" />
-        <Content Include="ExprLex.fsl" />
-        <Content Include="ExprPar.fs" />
-        <Content Include="ExprPar.fsi" />
-        <Content Include="ExprPar.fsy" />
+        <Content Include="Expr/Absyn.fs" />
+        <Content Include="Expr/Parse.fs" />
+        <Content Include="Expr/Expr.fs" />
+        <Content Include="Expr/ExprLex.fs" />
+        <Content Include="Expr/ExprLex.fsl" />
+        <Content Include="Expr/ExprPar.fs" />
+        <Content Include="Expr/ExprPar.fsi" />
+        <Content Include="Expr/ExprPar.fsy" />
     </ItemGroup>
 
 </Project>
