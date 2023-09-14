@@ -4,6 +4,8 @@
 
 Assuming things should be calculated according to the mathematical hierachy:
 
+Given the string `let z = (17) in z + 2 * 3 end EOF`, its derivative is
+
 ```
 Main => Expr EOF
 => LET NAME EQ Expr IN Expr END EOF
