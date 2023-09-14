@@ -6,6 +6,9 @@ Assuming things should be calculated according to the mathematical hierachy:
 
 Given the string `let z = (17) in z + 2 * 3 end EOF`, its derivative is
 
+Sequence of rules:  
+`A->F->H->G->C->C->B->E->C`
+
 ```
 Main => Expr EOF
 => LET NAME EQ Expr IN Expr END EOF
