@@ -6,9 +6,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Intcomp1.fs" />
-        <Compile Include="Program.fs" />
-        <Content Include="HelloLex\hello.fsl" />
         <Content Include="Expr\ExprPar.fsi" />
         <Content Include="Expr/Absyn.fs" />
         <Content Include="Expr\Parse.fs" />
