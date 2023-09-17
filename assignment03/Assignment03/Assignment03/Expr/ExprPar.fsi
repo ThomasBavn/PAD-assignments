@@ -7,6 +7,8 @@ type token =
   | END
   | IN
   | LET
+  | THEN
+  | ELSE
   | PLUS
   | MINUS
   | TIMES
@@ -21,6 +23,8 @@ type tokenId =
     | TOKEN_END
     | TOKEN_IN
     | TOKEN_LET
+    | TOKEN_THEN
+    | TOKEN_ELSE
     | TOKEN_PLUS
     | TOKEN_MINUS
     | TOKEN_TIMES

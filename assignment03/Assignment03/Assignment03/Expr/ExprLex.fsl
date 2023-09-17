@@ -34,6 +34,8 @@ rule Token = parse
   | '='             { EQ    } 
   | '('             { LPAR  } 
   | ')'             { RPAR  } 
+  | '?'             { THEN  }
+  | ':'             { ELSE  }
   | eof             { EOF   }
   | _               { failwith "Lexer error: illegal symbol" }
   
