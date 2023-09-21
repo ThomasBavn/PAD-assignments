@@ -79,8 +79,17 @@ let threePowerEight = fromString "let x = 3 in let pow n = if n = 0 then 1 else 
 
 let threeRaisedToExpSum = fromString "let x = 3
                                           in let pow n = if n = 0 then 1 else x * pow(n - 1)
-                                              in let sum m = if m = 0 then 1 else pow(m) + pow(m - 1)
+                                              in let sum m = if m = 0 then 1 else pow(m) + sum(m - 1)
                                                   in sum 11
+                                              end
+                                          end
+                                      end";;
+
+// Should be 167731333
+let oneToTenExpEight = fromString "let exp = 8 
+                                          in let sum n = if n = 0 then 1 else exp * sum(n - 1)
+                                              in let pow m = if m = 0 then 1 else sum(m) + pow(m - 1)
+                                                  in pow 10
                                               end
                                           end
                                       end";;

@@ -3,4 +3,4 @@
 open Parse
 open ParseAndRun
 
-printf "%d" (run threeRaisedToExpSum)
+printf "%d" (run oneToTenExpEight)
