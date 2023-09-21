@@ -1,2 +1,6 @@
 ﻿// For more information see https://aka.ms/fsharp-console-apps
-printfn "Hello from F#"
+
+open Parse
+open ParseAndRun
+
+printf "%d" (run threeRaisedToExpSum)
