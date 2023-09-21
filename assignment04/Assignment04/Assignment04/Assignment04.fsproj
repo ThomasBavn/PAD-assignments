@@ -22,4 +22,10 @@
         <Content Include="Fun\FunPar.fsy" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Reference Include="FsLexYacc.Runtime">
+        <HintPath>FsLexYacc.Runtime.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>
