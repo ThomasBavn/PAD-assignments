@@ -85,11 +85,13 @@ let threeRaisedToExpSum = fromString "let x = 3
                                           end
                                       end";;
 
-// Should be 167731333
 let oneToTenExpEight = fromString "let exp = 8 
-                                          in let sum n = if n = 0 then 1 else exp * sum(n - 1)
-                                              in let pow m = if m = 0 then 1 else sum(m) + pow(m - 1)
-                                                  in pow 10
-                                              end
-                                          end
-                                      end";;
+                                     in let pow x =
+                                       let aux n = if n = 0 then 1 else x * aux(n - 1)
+                                         in aux exp
+                                       end
+                                     in let sum n = if n= 1 then 1 else pow n + sum (n-1)
+                                       in sum 10                                                                       
+                                         end
+                                     end
+                                   end";;
