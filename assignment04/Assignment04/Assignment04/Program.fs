@@ -8,4 +8,4 @@ let sum = Letfun("sum", ["x";"y";"z"], Prim("+",Var "z",Prim("+", Var "x", Var "
 
 
 
-printf "%d" (run oneToTenExpEight)
+printf "%d" (run testOr)

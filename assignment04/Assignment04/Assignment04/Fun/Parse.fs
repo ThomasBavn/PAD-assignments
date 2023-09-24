@@ -95,3 +95,27 @@ let oneToTenExpEight = fromString "let exp = 8
                                          end
                                      end
                                    end";;
+
+let sumTwoArguments = fromString "let sum x y = x + y
+                                    in sum 3 4 end"
+                                    
+let powTwoArguments = fromString "let pow x n =
+                                    if n = 0 then 1 else x * pow x (n-1)
+                                    in pow 3 (4+1) end"
+                                    
+let sumThreeArguments = fromString "let sum x y z = x + y + z
+                                    in sum 3 4 3 end"
+
+
+let testAnd =fromString "let between min max x = x > min && x < max
+                           in between 3 6 7 end"
+                           
+                           
+let testAndSimple =fromString "2 < 3 && 2 < 1"
+
+
+let testOr =fromString "let thisOrThat this that x = x=this || x=that
+                           in thisOrThat 3 6 6 end" 
+                           
+let testOrSimple = fromString "false || false"                           
+                                                                                            

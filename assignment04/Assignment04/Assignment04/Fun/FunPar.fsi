@@ -15,6 +15,8 @@ type token =
   | TIMES
   | DIV
   | MOD
+  | AND
+  | OR
   | ELSE
   | END
   | FALSE
@@ -42,6 +44,8 @@ type tokenId =
     | TOKEN_TIMES
     | TOKEN_DIV
     | TOKEN_MOD
+    | TOKEN_AND
+    | TOKEN_OR
     | TOKEN_ELSE
     | TOKEN_END
     | TOKEN_FALSE
@@ -63,6 +67,8 @@ type nonTerminalId =
     | NONTERM_AtExpr
     | NONTERM_AppExpr
     | NONTERM_Const
+    | NONTERM_AtExprList
+    | NONTERM_NameList
 /// This function maps tokens to integer indexes
 val tagOfToken: token -> int
 
