@@ -10,7 +10,8 @@ open FSharp.Text.Parsing.ParseHelpers
     sestoft@itu.dk * 2009-10-19
   *)
 
- open Absyn;
+ open Absyn
+ 
 
 # 15 "FunPar.fs"
 // This type is the type of tokens accepted by the parser
@@ -490,7 +491,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 59 "FunPar.fsy"
-                                                               Letfun(_2, _3, _5, _7) 
+                                                               Letfun(_2, [_3], _5, _7) 
                    )
 # 59 "FunPar.fsy"
                  : Absyn.expr));
@@ -513,7 +514,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 64 "FunPar.fsy"
-                                                               Call(_1, _2)           
+                                                               Call(_1, [_2])           
                    )
 # 64 "FunPar.fsy"
                  : Absyn.expr));
@@ -525,7 +526,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 65 "FunPar.fsy"
-                                                               Call(_1, _2)           
+                                                               Call(_1, [_2])           
                    )
 # 65 "FunPar.fsy"
                  : Absyn.expr));
