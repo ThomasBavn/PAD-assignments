@@ -59,6 +59,8 @@ run (fromString "let add x = let f y = x+y in f end in add 2 end");;
 
 ## Exercise 6.4
 
+[//]: # (TODO: Add images)
+
 1. The type of `f` is polymorphic because `x` is never used.
 2. The type of `f` is not polymorphic because of the `if then else`, because `e2` and `e3` must be the same type.
 
