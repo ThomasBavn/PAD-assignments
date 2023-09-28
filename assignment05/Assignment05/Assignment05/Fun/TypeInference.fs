@@ -53,6 +53,8 @@ type typ =
      | TypB                                (* booleans                   *)
      | TypF of typ * typ                   (* (argumenttype, resulttype) *)
      | TypV of typevar                     (* type variable              *)
+     | TypL of typ                         (* list, element type is typ *)
+     
 
 and tyvarkind =  
      | NoLink of string                    (* uninstantiated type var.   *)
@@ -288,6 +290,8 @@ let rec typ (lvl : int) (env : tenv) (e : expr) : typ =
       let tr = TypV(newTypeVar lvl)
       unify tf (TypF(tx, tr));
       tr
+    | List(x::xs) ->
+       typ lvl env x 
 
 (* Type inference: tyinf e0 returns the type of e0, if any *)
 
