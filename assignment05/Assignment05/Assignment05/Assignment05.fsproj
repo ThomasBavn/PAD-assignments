@@ -7,6 +7,23 @@
 
     <ItemGroup>
         <Compile Include="Program.fs"/>
+        <Compile Incliude="Fun/Absyn.fs"/>
+        <Compile Include="chap5.fsx"/>
+        <Compile Include="chap6.fsx"/>
+        <Compile Include="Fun.fs"/>
+        <Compile Include="FunLex.fs"/>
+        <Compile Include="FunLex.fsl"/>
+        <Compile Include="FunPar.fs"/>
+        <Compile Include="FunPar.fsi"/>
+        <Compile Include="FunPar.fsy"/>
+        <Compile Include="HigherFun.fs"/>
+        <Compile Include="LinkedList.java"/>
+        <Compile Include="Parse.fs"/>
+        <Compile Include="ParseAndRun.fs"/>
+        <Compile Include="ParaseAndRunHigher.fs"/>
+        <Compile Include="ParseAndType.fs"/>
+        <Compile Include="slowTypeInference.fsx"/>
+        <Compile Include="TypeInference.fs"/>
     </ItemGroup>
 
 </Project>
