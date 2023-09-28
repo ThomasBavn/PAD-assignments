@@ -15,6 +15,7 @@
 %token PLUS MINUS TIMES DIV MOD
 %token EQ NE GT LT GE LE
 %token LPAR RPAR 
+%token FUN LAMBDA
 %token EOF
 
 %left ELSE              /* lowest precedence  */
@@ -58,6 +59,7 @@ AtExpr:
   | LET NAME EQ Expr IN Expr END        { Let($2, $4, $6)        }
   | LET NAME NAME EQ Expr IN Expr END   { Letfun($2, $3, $5, $7) }
   | LPAR Expr RPAR                      { $2                     }
+  | FUN NAME LAMBDA Expr                { Fun($2,$4)             }
 ;
 
 AppExpr:
