@@ -1,65 +1,33 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using System.Collections.ObjectModel;
-using System.Threading.Channels;
-
-Console.WriteLine("Hello, World!");
-
-
-int[] Merge(int[] xs, int[] ys)
-{
-    var xsI = 0;
-    var ysI = 0;
-
-    var res = new int[xs.Length + ys.Length];
-    var resI = 0;
-
-    while (resI < res.Length)
-    {
-        if (xsI == xs.Length)
-        {
-            for (int i = ysI; i < ys.Length; i++)
-            {
-                res[resI] = ys[ysI];
-                resI++;
-            }
-        }
-        if (ysI == ys.Length)
-        {
-            for (int i = xsI; i < xs.Length; i++)
-            {
-                res[resI] = xs[xsI];
-                resI++;
-            }
-        }
-        else if (xs[xsI] < ys[ysI])
-        {
-            res[resI] = xs[xsI];
-            xsI++;
-            resI++;
-        }
-        else if (xs[xsI] > ys[ysI])
-        {
-            res[resI] = ys[ysI];
-            ysI++;
-            resI++;
-        }
-        else
-        {
-            res[resI] = xs[xsI];
-            res[resI + 1] = ys[ysI];
-            resI += 2;
-            ysI++;
-            xsI++;
-        }
-    }
-
-    return res;
-}
-
-var list = Merge(new int[] { 3, 5, 12 }, new int[] { 2, 3, 4, 7 });
+﻿var list = Merge(new[] { 3, 5, 12 }, new[] { 2, 3, 4, 7 });
 
 foreach (var x in list)
 {
     Console.Write($"{x} ");
+}
+
+return;
+
+static int[] Merge(int[] first, int[] second)
+{
+    var result = new int[first.Length + second.Length];
+    var counter = 0;
+
+    for (int i = 0, j = 0; i < first.Length || j < second.Length;)
+    {
+        int? x = i != first.Length ? first[i] : null;
+        int? y = j != second.Length ? second[j] : null;
+
+        if (x.HasValue && (x < y || !y.HasValue))
+        {
+            result[counter++] = x.Value;
+            i++;
+        }
+        else if (y.HasValue)
+        {
+            result[counter++] = y.Value;
+            j++;
+        }
+    }
+
+    return result;
 }
