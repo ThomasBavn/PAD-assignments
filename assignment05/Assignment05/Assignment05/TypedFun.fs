@@ -37,7 +37,7 @@ type typ =
   | TypI                                (* int                         *)
   | TypB                                (* bool                        *)
   | TypF of typ * typ                   (* (argumenttype, resulttype)  *)
-  | TypL of typ
+  | TypL of typ                         (* List of types *)
 
 (* New abstract syntax with explicit types, instead of Absyn.expr: *)
 
@@ -140,6 +140,9 @@ let rec typ (e : tyexpr) (env : typ env) : typ =
         else failwith "Call: wrong argument type"
       | _ -> failwith "Call: unknown function"
     | Call(_, eArg) -> failwith "Call: illegal function in call"
+    | ListExpr(tyexprs, t) ->
+      let typesMatch = List.fold (fun acc exp -> if (typ exp env ) = t then acc else false  ) true  tyexprs
+      if typesMatch then TypL t else failwith "ListExpr: All expressions are not the same type" 
 
 let typeCheck e = typ e [];;
 
