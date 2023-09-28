@@ -12,3 +12,4 @@ type expr =
   | Letfun of string * string * expr * expr    (* (f, x, fBody, letBody) *)
   | Call of expr * expr
   | List of expr list
+  | Fun of string * expr
