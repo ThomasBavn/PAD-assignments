@@ -35,6 +35,7 @@ let fromFile (filename : string) =
 
 let e1 = fromString "5+7";;
 let e2 = fromString "let f x = x + 7 in f 2 end";;
+let e3 = fromString "let f x = x + 7 in f 2 end"
 
 (* Examples in concrete syntax *)
 
@@ -74,8 +75,25 @@ let ex5 = fromString
 // Exercise 4.2
 
 let sumThousandToOne = fromString "let sum n = if n = 1 then 1 else n + sum(n - 1) in sum 1000 end";;
-
+(*
+Letfun
+  ("sum", ["n"],
+   If
+     (Prim ("=", Var "n", CstI 1), CstI 1,
+      Prim ("+", Var "n", Call (Var "sum", [Prim ("-", Var "n", CstI 1)]))),
+   Call (Var "sum", [CstI 1000]))
+*)
 let threePowerEight = fromString "let x = 3 in let pow n = if n = 0 then 1 else x * pow(n - 1) in pow 8 end end";;
+(*
+Let
+  ("x", CstI 3,
+   Letfun
+     ("pow", ["n"],
+      If
+        (Prim ("=", Var "n", CstI 0), CstI 1,
+         Prim ("*", Var "x", Call (Var "pow", [Prim ("-", Var "n", CstI 1)]))),
+      Call (Var "pow", [CstI 8])))
+*)
 
 let threeRaisedToExpSum = fromString "let x = 3
                                           in let pow n = if n = 0 then 1 else x * pow(n - 1)
@@ -84,7 +102,24 @@ let threeRaisedToExpSum = fromString "let x = 3
                                               end
                                           end
                                       end";;
+(*
+Let
+  ("x", CstI 3,
+   Letfun
+     ("pow", ["n"],
+      If
+        (Prim ("=", Var "n", CstI 0), CstI 1,
+         Prim ("*", Var "x", Call (Var "pow", [Prim ("-", Var "n", CstI 1)]))),
+      Letfun
+        ("sum", ["m"],
+         If
+           (Prim ("=", Var "m", CstI 0), CstI 1,
+            Prim
+              ("+", Call (Var "pow", [Var "m"]),
+               Call (Var "sum", [Prim ("-", Var "m", CstI 1)]))),
+         Call (Var "sum", [CstI 11])))) 
 
+*)
 let oneToTenExpEight = fromString "let exp = 8 
                                      in let pow x =
                                        let aux n = if n = 0 then 1 else x * aux(n - 1)
@@ -95,7 +130,26 @@ let oneToTenExpEight = fromString "let exp = 8
                                          end
                                      end
                                    end";;
-
+(*
+Let
+  ("exp", CstI 8,
+   Letfun
+     ("pow", ["x"],
+      Letfun
+        ("aux", ["n"],
+         If
+           (Prim ("=", Var "n", CstI 0), CstI 1,
+            Prim ("*", Var "x", Call (Var "aux", [Prim ("-", Var "n", CstI 1)]))),
+         Call (Var "aux", [Var "exp"])),
+      Letfun
+        ("sum", ["n"],
+         If
+           (Prim ("=", Var "n", CstI 1), CstI 1,
+            Prim
+              ("+", Call (Var "pow", [Var "n"]),
+               Call (Var "sum", [Prim ("-", Var "n", CstI 1)]))),
+         Call (Var "sum", [CstI 10]))))
+*)
 let sumTwoArguments = fromString "let sum x y = x + y
                                     in sum 3 4 end"
                                     
