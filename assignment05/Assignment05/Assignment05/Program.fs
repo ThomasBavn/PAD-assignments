@@ -55,6 +55,42 @@ let func f1 f2 =
 
 let func2 a = a<2
     
+// 6.5
+
+// 6.5.1
+let sixfive11 = inferType (fromString @"let f x = 1 in f f end")
+// let sixfive12 = inferType (fromString @"let f g = g g in f end")
+let sixfive13 =inferType (fromString @"
+let f x =
+    let g y = y
+    in g false
+    end
+in f 42 end
+")
+
+// let sixfive14 =inferType (fromString @"
+// let f x =
+//     let g y = if true then y else x
+//     in g false end
+// in f 42 end
+// ")
+let sixfive15 =inferType (fromString @"
+let f x =
+    let g y = if true then y else x
+    in g false end
+in f true end
+")
+
+printf $@"
+6.5.1.1
+{sixfive11}
+
+6.5.1.3
+{sixfive13}
+
+6.5.1.5
+{sixfive15}
+"
     
 let sixfive = inferType (fromString @"
 let f1 ab =
@@ -78,9 +114,3 @@ in func func end
 ")
     
 printf $"{sixfive8}"
-
-(*
-def function arg:string->'a  returns string :
-    function (function)
-
-*)

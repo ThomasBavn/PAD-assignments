@@ -66,6 +66,35 @@ run (fromString "let add x = let f y = x+y in f end in add 2 end");;
 
 ## Exercise 6.5
 
+### 1
+
+`let f x = 1 in f f end` has signature `int`
+
+`let f g = g g in f end` Does not have a signature, since the function is circular
+
+```
+let f x =
+    let g y = if true then y else x in g false end
+in f true end
+```
+has signature of `bool`
+
+```
+let f x =
+    let g y = if true then y else x
+    in g false end
+in f 42 end
+```
+fails because `x` is an int and `y` is a boolean, meaning the `g` function may in theory return either an `int` or `bool`
+
+```
+let f x =
+let g y = if true then y else x in g false end
+in f true end
+```
+has signature of `bool`
+
+### 2
 ```
 // bool -> bool
 let one b = b=true in one end
