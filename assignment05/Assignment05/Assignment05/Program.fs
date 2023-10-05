@@ -70,8 +70,14 @@ let func =
       let f2 a = f2 a in f2 end
 in func end
 ")
+
+let sixfive8 = inferType (fromString @"
+let func f =
+    let f2 a = f2 a in f2 f end
+in func func end
+")
     
-printf $"{sixfive7}"
+printf $"{sixfive8}"
 
 (*
 def function arg:string->'a  returns string :

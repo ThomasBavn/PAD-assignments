@@ -116,7 +116,11 @@ in func end
 result:
 ('g -> 'h)
 
-let func =
-      let f2 a = f2 a in f2  end
-in func end
+'a
+let func f =
+    let f2 a = f2 a in f2 f end
+in func func end
+
+result:
+'k
 ```
