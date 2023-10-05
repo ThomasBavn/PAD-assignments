@@ -89,7 +89,34 @@ let five a =
     in five end
 
 // ('a->'b)->('b->'c)->('a->'c)
-let 
+as real f# code as reference
+let func f1 f2 =
+    fun x->
+        let inner = f1 x
+        f2 inner
+        
+translated to micro-ML
+let f1 ab =
+    let f2 bc= 
+        let apply a = 
+            let x = ab a in bc x end
+        in apply end
+    in f2 end
+in f1 end
 
-//
+result:
+(('l -> 'k) -> (('k -> 'm) -> ('l -> 'm)))
+
+'a -> 'b
+let func =
+      let f2 a = f2 a in f2 end
+in func end
+(That's the most scuffed shit I've ever seen)
+
+result:
+('g -> 'h)
+
+let func =
+      let f2 a = f2 a in f2  end
+in func end
 ```
