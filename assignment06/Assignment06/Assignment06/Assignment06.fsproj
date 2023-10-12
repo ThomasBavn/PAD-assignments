@@ -23,7 +23,6 @@
         <Content Include="MicroC\CPar.fsy" />
         <Content Include="MicroC\Machine.java" />
         <Compile Include="Imp\Naive.fs" />
-        <Compile Include="Imp\Parameters.cs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 
