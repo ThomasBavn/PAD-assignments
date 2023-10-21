@@ -14,4 +14,43 @@
 // printfn "Ex11:"
 // printfn "%A" ex11
 
-run (fromFile "ex4.c") [10]
+let ex ="
+void main(int n){
+    int arr[20];
+    
+    squares(n,arr);
+    
+    int sump;
+    sump = 0;
+    
+    arrsum(n,arr,&sump);
+    
+    print sump;   
+}
+
+void histogram(int n, int ns[], int max, int freq[]){
+
+    
+
+}
+
+void squares(int n, int arr[]){ 
+    int count;
+    count=0;
+    while (count<n){
+       arr[count] = count*count;
+       count=count+1;
+    }
+}
+
+void arrsum(int n, int arr[], int *sump){ 
+    int count;
+    count=0;
+    while (count<n){
+        *sump = (*sump)+arr[count];
+        count=count+1;
+    }
+}
+"
+
+run (fromFile "excersize7.c") []
