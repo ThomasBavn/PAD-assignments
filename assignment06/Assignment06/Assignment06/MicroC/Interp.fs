@@ -193,7 +193,18 @@ and eval e locEnv gloEnv store : int * store =
     | Orelse(e1, e2) -> 
       let (i1, store1) as res = eval e1 locEnv gloEnv store
       if i1<>0 then res else eval e2 locEnv gloEnv store1
-    | Call(f, es) -> callfun f es locEnv gloEnv store 
+    | Call(f, es) -> callfun f es locEnv gloEnv store
+    | PreInc a ->
+      let address=(access a locEnv gloEnv store |> fst)
+      let x = getSto store address
+      let newStore = setSto store  address (x+1)
+      (x+1,newStore)
+    | PreDec a ->
+      let address=(access a locEnv gloEnv store |> fst)
+      let x = getSto store address
+      let newStore = setSto store  address (x-1)
+      (x-1,newStore)
+  
 
 and access acc locEnv gloEnv store : int * store = 
     match acc with 

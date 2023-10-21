@@ -212,3 +212,10 @@ void printArray(int arr[], int len){
 When running the program using the array from the example in the book ( the array [1, 2, 1, 1, 1, 2, 0]), it correctly prints "1 4 2 0".
 
 
+
+# 7.4
+We implemented the solution in absyn.fs at line 26 and 27, aswell as in interp.fs at line 197-206.
+
+# 7.5
+We implemented the solution in CPar.fsy at line 140 and 141, and in CLex.fsl line 59 and 60.
+

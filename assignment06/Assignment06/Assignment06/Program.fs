@@ -15,42 +15,28 @@
 // printfn "%A" ex11
 
 let ex ="
-void main(int n){
-    int arr[20];
-    
-    squares(n,arr);
-    
-    int sump;
-    sump = 0;
-    
-    arrsum(n,arr,&sump);
-    
-    print sump;   
-}
-
-void histogram(int n, int ns[], int max, int freq[]){
-
-    
-
-}
-
-void squares(int n, int arr[]){ 
-    int count;
-    count=0;
-    while (count<n){
-       arr[count] = count*count;
-       count=count+1;
-    }
-}
-
-void arrsum(int n, int arr[], int *sump){ 
-    int count;
-    count=0;
-    while (count<n){
-        *sump = (*sump)+arr[count];
-        count=count+1;
-    }
+void main(){
+    int x;
+    x = 2;
+    int y;
+    y = 3 * ++x;
+    print y;
+    print x;
 }
 "
 
-run (fromFile "excersize7.c") []
+run (fromString ex) []
+
+(*
+printf "%A" (fromString "
+void main(){
+
+int i;
+i=0;
+while (i<3) {
+    print i;
+    i = i+1;
+}
+}
+")
+*)

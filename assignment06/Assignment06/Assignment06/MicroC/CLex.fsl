@@ -55,7 +55,9 @@ rule Token = parse
   | '-'             { MINUS } 
   | '*'             { TIMES } 
   | '/'             { DIV } 
-  | '%'             { MOD }                     
+  | '%'             { MOD }   
+  | "++"            { PREINC }  
+  | "--"            { PREDEC }                
   | '='             { ASSIGN } 
   | "=="            { EQ } 
   | "!="            { NE }
