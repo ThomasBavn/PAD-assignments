@@ -1,0 +1,41 @@
+24: LDARGS - command line args
+19: CALL 1 5 - call main(n) with one argument
+25: STOP - stop the program
+15: INCSP 1 - make space for the integer variable "i"
+13: GETBP  --\
+ 0: CSTI 1    \- 
+ 1: ADD    ---/
+ 0: CSTI 0
+12: STI
+15: INCSP -1
+16: GOTO 43
+13: GETBP
+ 0: CSTI 1
+ 1: ADD
+11: LDI
+22: PRINTI
+15: INCSP -1
+13: GETBP
+ 0: CSTI 1
+ 1: ADD
+13: GETBP
+ 0: CSTI 1
+ 1: ADD
+11: LDI
+ 0: CSTI 1
+ 1: ADD
+12: STI
+15: INCSP -1
+15: INCSP 0
+13: GETBP
+ 0: CSTI 1
+ 1: ADD
+11: LDI
+13: GETBP
+ 0: CSTI 0
+ 1: ADD
+11: LDI
+ 7: LT
+18: IFNZRO 18
+15: INCSP -1
+21: RET 0
