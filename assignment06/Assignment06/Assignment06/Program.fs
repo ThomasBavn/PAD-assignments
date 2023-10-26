@@ -16,12 +16,43 @@
 
 let ex ="
 void main(){
-    int x;
-    x = 2;
-    int y;
-    y = 3 * ++x;
-    print y;
-    print x;
+    int ns[7];
+    ns[0]=1;
+    ns[1]=2;
+    ns[2]=1;
+    ns[3]=1;
+    ns[4]=1;
+    ns[5]=2;
+    ns[6]=0;
+
+    int freq[4];
+
+
+    histogram(7,ns,3,freq);
+
+    printArray(freq,4);
+  
+}
+
+void histogram(int n, int ns[], int max, int freq[]){
+
+    while (max>=0)
+    {
+        freq[max]=0;
+        max = max-1;
+    }
+    
+    int i;
+    for (i=0;i<n;++i){
+        freq[ns[i]]=freq[ns[i]]+1;
+    }
+}
+
+void printArray(int arr[], int len){
+    int i;
+    for (i=0;i<len;++i){
+        print arr[i];
+    }
 }
 "
 

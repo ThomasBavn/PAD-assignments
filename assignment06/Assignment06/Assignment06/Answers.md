@@ -211,10 +211,111 @@ void printArray(int arr[], int len){
 ```
 When running the program using the array from the example in the book ( the array [1, 2, 1, 1, 1, 2, 0]), it correctly prints "1 4 2 0".
 
+# 7.3
+We implement the for loop in CPar.fsy at line 105 and 112, as well as in Clex.fsl at line 31.
+These are the programs from 7.2 implement using for loops:
+
+arrsum:
+```c
+void main(){
+    int arr[4];
+    *arr=7;
+    *(arr+1)=13;
+    *(arr+2)=9;
+    *(arr+3)=8;
+   
+    int sump;
+    sump=0;
+    
+    arrsum(4,arr,&sump);
+    
+    print sump;
+}
+
+void arrsum(int n, int arr[], int *sump){ 
+    int i;
+    for (i=0;i<n;++i){
+        *sump = (*sump)+arr[i];
+    }
+}
+```
+
+squares:
+```c
+void main(int n){
+    int arr[20];
+    
+    squares(n,arr);
+    
+    int sump;
+    sump = 0;
+    
+    arrsum(n,arr,&sump);
+    
+    print sump;   
+}
+
+void squares(int n, int arr[]){ 
+    int i;
+    for(i=0;i<n;++i){
+       arr[i] = i*i;
+    }
+}
+
+void arrsum(int n, int arr[], int *sump){ 
+    int i;
+    for (i=0;i<n;++i){
+        *sump = (*sump)+arr[i];
+    }
+}
+```
+
+histogram:
+```
+void main(){
+    int ns[7];
+    ns[0]=1;
+    ns[1]=2;
+    ns[2]=1;
+    ns[3]=1;
+    ns[4]=1;
+    ns[5]=2;
+    ns[6]=0;
+
+    int freq[4];
+
+
+    histogram(7,ns,3,freq);
+
+    printArray(freq,4);
+  
+}
+
+void histogram(int n, int ns[], int max, int freq[]){
+
+    while (max>=0)
+    {
+        freq[max]=0;
+        max = max-1;
+    }
+    
+    int i;
+    for (i=0;i<n;++i){
+        freq[ns[i]]=freq[ns[i]]+1;
+    }
+}
+
+void printArray(int arr[], int len){
+    int i;
+    for (i=0;i<len;++i){
+        print arr[i];
+    }
+}
+```
 
 
 # 7.4
-We implemented the solution in absyn.fs at line 26 and 27, aswell as in interp.fs at line 197-206.
+We implemented the solution in absyn.fs at line 26 and 27, as well as in interp.fs at line 197-206.
 
 # 7.5
 We implemented the solution in CPar.fsy at line 140 and 141, and in CLex.fsl line 59 and 60.
