@@ -9,3 +9,5 @@ In ex5.decoded it can be seen that there is a nested scope at the line 43, becau
 
 The output of running ex3 10 is "0 1 2 3 4 5 6 7 8 9"
 
+
+line 210 in comp.fs
