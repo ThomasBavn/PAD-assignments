@@ -1,3 +1,8 @@
 ﻿open ParseAndComp
-compileToFile (fromFile "ex5.c") "ex5.out";;
-   compile "ex5";;
+compileToFile (fromFile "exercise_83.c") "exercise_83.out";;
+   compile "exercise_83";;
+   
+
+
+   
+
