@@ -1,22 +1,22 @@
-[ ]{0: LDARGS}
-[ 4 ]{1: CALL 1 5}
-[ 4 -999 4 ]{5: INCSP 1}
-[ 4 -999 4 0 ]{7: GETBP}
-[ 4 -999 4 0 2 ]{8: CSTI 1}
-[ 4 -999 4 0 2 1 ]{10: ADD}
-[ 4 -999 4 0 3 ]{11: CSTI 0}
-[ 4 -999 4 0 3 0 ]{13: STI}
-[ 4 -999 4 0 0 ]{14: INCSP -1}
-[ 4 -999 4 0 ]{16: GOTO 43}
-[ 4 -999 4 0 ]{43: GETBP}
-[ 4 -999 4 0 2 ]{44: CSTI 1}
-[ 4 -999 4 0 2 1 ]{46: ADD}
-[ 4 -999 4 0 3 ]{47: LDI}
-[ 4 -999 4 0 0 ]{48: GETBP}
-[ 4 -999 4 0 0 2 ]{49: CSTI 0}
-[ 4 -999 4 0 0 2 0 ]{51: ADD}
-[ 4 -999 4 0 0 2 ]{52: LDI}
-[ 4 -999 4 0 0 4 ]{53: LT}
+[ ]{0: LDARGS}                      # load command line argument 4 and add to env
+[ 4 ]{1: CALL 1 5}                  # call main function
+[ 4 -999 4 ]{5: INCSP 1}            # make space for variable "i"
+[ 4 -999 4 0 ]{7: GETBP}            # get base pointer and push to stack
+[ 4 -999 4 0 2 ]{8: CSTI 1}         # push 1 to stack
+[ 4 -999 4 0 2 1 ]{10: ADD}         # pop stack twice, add values (1 and bp), and push added values
+[ 4 -999 4 0 3 ]{11: CSTI 0}        # push 0 to stack
+[ 4 -999 4 0 3 0 ]{13: STI}         # store 0 at address 3 (bp +1), variable "i" now has value 0
+[ 4 -999 4 0 0 ]{14: INCSP -1}      # free up space
+[ 4 -999 4 0 ]{16: GOTO 43}         # go to while loop condition check
+[ 4 -999 4 0 ]{43: GETBP}           # get base pointer and push to stack
+[ 4 -999 4 0 2 ]{44: CSTI 1}        # push 1 to stack
+[ 4 -999 4 0 2 1 ]{46: ADD}         # pop stack twice, add values (1 and bp), and push added values
+[ 4 -999 4 0 3 ]{47: LDI}           # load value at address 3, and push to stack. (get the value of i)
+[ 4 -999 4 0 0 ]{48: GETBP}         # get base pointer and push to stack
+[ 4 -999 4 0 0 2 ]{49: CSTI 0}      # push 0 to stack
+[ 4 -999 4 0 0 2 0 ]{51: ADD}       # pop stack twice, add values (0 and bp), and push added values
+[ 4 -999 4 0 0 2 ]{52: LDI}         # load value at address 2 (variable "n")
+[ 4 -999 4 0 0 4 ]{53: LT}          # check if top element is less than the 
 [ 4 -999 4 0 1 ]{54: IFNZRO 18}
 [ 4 -999 4 0 ]{18: GETBP}
 [ 4 -999 4 0 2 ]{19: CSTI 1}
