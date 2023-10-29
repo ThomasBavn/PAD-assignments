@@ -33,22 +33,22 @@
     public static void Main(string[] args)
     {
         //var fileName = args[0];
-        var fileName = "ex3.out";
+        var fileName = "ex13.out";
         var line = File.ReadAllText(fileName);
         var numbers = line.Split(' ').Select(int.Parse).ToList();
         var enumerator = numbers.GetEnumerator();
-        var output = DecodeInstruction(enumerator, new List<string>());
+        var output = DecodeInstruction(enumerator, new List<string>(),0);
         File.WriteAllText(Path.GetFileNameWithoutExtension(fileName) + ".decoded", output);
     }
 
-    private static string DecodeInstruction(IEnumerator<int> numbers, List<string> instructions)
+    private static string DecodeInstruction(IEnumerator<int> numbers, List<string> instructions,int instructionIndex)
     {
         if (!numbers.MoveNext())
         {
             return string.Join(Environment.NewLine, instructions);
         }
 
-        var instruction = (numbers.Current + ": ").PadLeft(4);
+        var instruction = ($"[{instructionIndex}] "+numbers.Current + ": ").PadLeft(4);
 
         instruction += numbers.Current switch
         {
@@ -90,6 +90,7 @@
             case 21:
                 numbers.MoveNext();
                 instruction += $" {numbers.Current}";
+                instructionIndex++;
 
                 break;
             case 19:
@@ -97,6 +98,7 @@
                 instruction += $" {numbers.Current}";
                 numbers.MoveNext();
                 instruction += $" {numbers.Current}";
+                instructionIndex += 2;
 
                 break;
             case 20:
@@ -106,12 +108,14 @@
                 instruction += $" {numbers.Current}";
                 numbers.MoveNext();
                 instruction += $" {numbers.Current}";
+                
+                instructionIndex += 3;
 
                 break;
         }
 
         instructions.Add(instruction);
 
-        return DecodeInstruction(numbers, instructions);
+        return DecodeInstruction(numbers, instructions,instructionIndex+1);
     }
 }

@@ -1,0 +1,87 @@
+[0] 24: LDARGS
+[1] 19: CALL 1 5
+[4] 25: STOP
+[5] 15: INCSP 1
+[7] 13: GETBP
+[8] 0: CSTI 1
+[10] 1: ADD
+[11] 0: CSTI 1889
+[13] 12: STI
+[14] 15: INCSP -1
+                    # Goto while check
+[16] 16: GOTO 95
+                    # y = y + 1
+[18] 13: GETBP
+[19] 0: CSTI 1
+[21] 1: ADD
+[22] 13: GETBP
+[23] 0: CSTI 1
+[25] 1: ADD
+[26] 11: LDI
+[27] 0: CSTI 1
+[29] 1: ADD
+[30] 12: STI
+[31] 15: INCSP -1
+                    # y % 4 == 0. If false reach 79 with 0 at the top of stack
+[33] 13: GETBP
+[34] 0: CSTI 1
+[36] 1: ADD
+[37] 11: LDI
+[38] 0: CSTI 4
+[40] 5: MOD
+[41] 0: CSTI 0
+[43] 6: EQ
+[44] 17: IFZERO 77
+                    # y % 100 != 0, if true, jump to print
+[46] 13: GETBP
+[47] 0: CSTI 1
+[49] 1: ADD
+[50] 11: LDI
+[51] 0: CSTI 100
+[53] 5: MOD
+[54] 0: CSTI 0
+[56] 6: EQ
+[57] 8: NOT
+[58] 18: IFNZRO 73
+                    # y % 400 == 0. if true, reach 79 with 1 at the top of stack
+[60] 13: GETBP
+[61] 0: CSTI 1
+[63] 1: ADD
+[64] 11: LDI
+[65] 0: CSTI 400
+[67] 5: MOD
+[68] 0: CSTI 0
+[70] 6: EQ
+[71] 16: GOTO 75
+        
+[73] 0: CSTI 1
+[75] 16: GOTO 79
+[77] 0: CSTI 0
+                    # If 0 is at the top of stack, jump past print, otherwise print
+[79] 17: IFZERO 91
+[81] 13: GETBP
+[82] 0: CSTI 1
+[84] 1: ADD
+[85] 11: LDI
+[86] 22: PRINTI
+[87] 15: INCSP -1
+[89] 16: GOTO 93
+[91] 15: INCSP 0
+[93] 15: INCSP 0
+                    # While check
+                    # get y
+[95] 13: GETBP
+[96] 0: CSTI 1
+[98] 1: ADD
+[99] 11: LDI
+                    # get n
+[100] 13: GETBP
+[101] 0: CSTI 0
+[103] 1: ADD
+[104] 11: LDI
+                    # if y < n is true then goto 18 else return
+[105] 7: LT
+[106] 18: IFNZRO 18
+
+[108] 15: INCSP -1
+[110] 21: RET 0
