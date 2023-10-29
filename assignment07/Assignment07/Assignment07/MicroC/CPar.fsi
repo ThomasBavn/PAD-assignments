@@ -28,6 +28,8 @@ type token =
   | TIMES
   | DIV
   | MOD
+  | QMARK
+  | COLON
   | CHAR
   | ELSE
   | IF
@@ -71,6 +73,8 @@ type tokenId =
     | TOKEN_TIMES
     | TOKEN_DIV
     | TOKEN_MOD
+    | TOKEN_QMARK
+    | TOKEN_COLON
     | TOKEN_CHAR
     | TOKEN_ELSE
     | TOKEN_IF
