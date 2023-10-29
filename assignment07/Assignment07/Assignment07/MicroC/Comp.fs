@@ -144,6 +144,20 @@ let rec cStmt stmt (varEnv : varEnv) (funEnv : funEnv) : instr list =
       [RET (snd varEnv - 1)]
     | Return (Some e) -> 
       cExpr e varEnv funEnv @ [RET (snd varEnv)]
+    | Switch (ex,cases) ->
+        let labEnd = newLabel()
+        let evaledEx = cExpr ex varEnv funEnv
+        let rec caseGen cases = 
+            match cases with
+            | [] -> []
+            | x::xs ->
+                match x with
+                | Case (caseExpr,caseStmt)->
+                    let labNext = newLabel()
+                    (cExpr caseExpr varEnv funEnv) @ evaledEx @ [EQ;IFZERO labNext] @ cStmt caseStmt varEnv funEnv @[GOTO labEnd] @ [Label labNext]
+                    @ caseGen xs 
+                | _ -> failwith "you done fucked up"
+        (caseGen cases) @[Label labEnd]
 
 and cStmtOrDec stmtOrDec (varEnv : varEnv) (funEnv : funEnv) : varEnv * instr list = 
     match stmtOrDec with 
@@ -220,13 +234,6 @@ and cExpr (e : expr) (varEnv : varEnv) (funEnv : funEnv) : instr list =
         @ [Label labElse] @ (cExpr els varEnv funEnv) @[GOTO labEnd]
         @ [Label labThen] @ (cExpr thn varEnv funEnv)
         @ [Label labEnd]
-    // | If(e, stmt1, stmt2) -> 
-    //   let labelse = newLabel()
-    //   let labend  = newLabel()
-    //   cExpr e varEnv funEnv @ [IFZERO labelse] 
-    //   @ cStmt stmt1 varEnv funEnv @ [GOTO labend]
-    //   @ [Label labelse] @ cStmt stmt2 varEnv funEnv
-    //   @ [Label labend]           
         
 
 (* Generate code to access variable, dereference pointer or index array.

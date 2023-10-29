@@ -15,6 +15,7 @@ let nl = CstI 10
 %token <string> CSTSTRING NAME
 
 %token CHAR ELSE IF INT NULL PRINT PRINTLN RETURN VOID WHILE FOR
+%token SWITCH CASE
 %token QMARK COLON
 %token PLUS MINUS TIMES DIV MOD 
 %token PREINC PREDEC
@@ -27,6 +28,7 @@ let nl = CstI 10
 %nonassoc PRINT
 %left SEQOR
 %left SEQAND
+%left SWITCH CASE
 %left QMARK COLON
 %left EQ NE 
 %left GT LT GE LE
@@ -98,6 +100,11 @@ Stmt:
   | StmtU                               { $1 }
 ;
 
+SwitchBody:
+    /* empty */                         { [] }
+    | CASE Expr COLON Block SwitchBody  { Case($2,$4) :: $5 }
+;
+
 StmtM:  /* No unbalanced if-else */
     Expr SEMI                           { Expr($1)             }
   | RETURN SEMI                         { Return None          }
@@ -105,8 +112,10 @@ StmtM:  /* No unbalanced if-else */
   | Block                               { $1                   }
   | IF LPAR Expr RPAR StmtM ELSE StmtM  { If($3, $5, $7)       }
   | WHILE LPAR Expr RPAR StmtM          { While($3, $5)        }
+  | SWITCH LPAR Expr RPAR LBRACE SwitchBody RBRACE    { Switch($3,$6)        }
   /*| FOR LPAR Expr SEMI Expr SEMI Expr RPAR Stmt {Block [$3; While ($5,Block [$9; $7] )]}*/
 ;
+
 
 StmtU:
     IF LPAR Expr RPAR StmtM ELSE StmtU  { If($3, $5, $7)       }

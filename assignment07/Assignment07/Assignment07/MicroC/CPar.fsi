@@ -30,6 +30,8 @@ type token =
   | MOD
   | QMARK
   | COLON
+  | SWITCH
+  | CASE
   | CHAR
   | ELSE
   | IF
@@ -75,6 +77,8 @@ type tokenId =
     | TOKEN_MOD
     | TOKEN_QMARK
     | TOKEN_COLON
+    | TOKEN_SWITCH
+    | TOKEN_CASE
     | TOKEN_CHAR
     | TOKEN_ELSE
     | TOKEN_IF
@@ -105,6 +109,7 @@ type nonTerminalId =
     | NONTERM_Block
     | NONTERM_StmtOrDecSeq
     | NONTERM_Stmt
+    | NONTERM_SwitchBody
     | NONTERM_StmtM
     | NONTERM_StmtU
     | NONTERM_Expr

@@ -1,6 +1,6 @@
 ﻿open ParseAndComp
-compileToFile (fromFile "exercise_85.c") "exercise_85.out";;
-   compile "exercise_85";;
+compileToFile (fromFile "exercise_86.c") "exercise_86.out";;
+   compile "exercise_86";;
    
 
 
