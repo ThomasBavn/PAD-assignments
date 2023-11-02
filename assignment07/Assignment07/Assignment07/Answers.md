@@ -1,3 +1,5 @@
+# Assignment 7
+
 ## Exercise 8.1
 
 ### Exercise 8.1.2
@@ -35,3 +37,10 @@ If the loop condition is true, then jump to the while loop's body at 18.
 
 Description of our observations with more context can be found in `ex13.decoded`
 
+## 8.5
+
+Implementation for Ternary is in Comp.fs line 227
+
+## 8.6
+
+Implementation is in CPar.fsy line 103 and 115 and Comp.fs 147
