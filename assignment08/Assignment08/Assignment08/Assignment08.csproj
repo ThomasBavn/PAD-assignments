@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{9F96F7DD-02EC-4F22-A6B4-96766453C19B}</ProjectGuid>
+        <OutputType>Exe</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>Assignment08</RootNamespace>
+        <AssemblyName>Assignment08</AssemblyName>
+        <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="System" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Xml" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="virtual\CircularQueue.cs" />
+        <Compile Include="virtual\ex13.cs" />
+        <Compile Include="virtual\Selsort.cs" />
+        <Compile Include="virtual\Square.cs" />
+        <Compile Include="virtual\StringConcatSpeed.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <Content Include="virtual\CircularQueue.class" />
+      <Content Include="virtual\CircularQueue.il" />
+      <Content Include="virtual\CircularQueue.java" />
+      <Content Include="virtual\CircularQueue.jvmbytecode" />
+      <Content Include="virtual\ex13.class" />
+      <Content Include="virtual\ex13.csc2012.il" />
+      <Content Include="virtual\ex13.exe" />
+      <Content Include="virtual\ex13.exe.mdb" />
+      <Content Include="virtual\ex13.gmcs2012.il" />
+      <Content Include="virtual\ex13.java" />
+      <Content Include="virtual\ex13.jvmbytecode" />
+      <Content Include="virtual\ex13.pdb" />
+      <Content Include="virtual\ex6java.class" />
+      <Content Include="virtual\ex6java.java" />
+      <Content Include="virtual\InOut.class" />
+      <Content Include="virtual\LinkedList.class" />
+      <Content Include="virtual\Node.class" />
+      <Content Include="virtual\QueueWithMistake.java" />
+      <Content Include="virtual\README.TXT" />
+      <Content Include="virtual\Selsort.class" />
+      <Content Include="virtual\Selsort.exe" />
+      <Content Include="virtual\Selsort.il" />
+      <Content Include="virtual\Selsort.java" />
+      <Content Include="virtual\Selsort.jvmbytecode" />
+      <Content Include="virtual\Square.exe" />
+      <Content Include="virtual\Square.exe.mdb" />
+      <Content Include="virtual\Square.pdb" />
+      <Content Include="virtual\StringConcatSpeed.class" />
+      <Content Include="virtual\StringConcatSpeed.java" />
+      <Content Include="virtual\Timer.class" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+
+</Project>
