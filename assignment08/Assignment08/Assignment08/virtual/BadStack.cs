@@ -1,6 +1,11 @@
 
 using System;
 
+namespace MyNamespace
+{
+    
+}
+
 public class BadStack<T>
 {
     private T[] _arr;
@@ -25,7 +30,7 @@ public class BadStack<T>
     public T Pop()
     {
         T toReturn = _arr[--_count ];
-        if (_count < _arr.Length /2)
+        if (_count <= _arr.Length /2)
             ResizeDown();
         return toReturn;
     }
@@ -33,7 +38,7 @@ public class BadStack<T>
     private void ResizeDown()
     {
         T[] temp = new T[_arr.Length / 2];
-        for (int i = 0; i < _arr.Length; i++)
+        for (int i = 0; i < _count; i++)
         {
             temp[i] = _arr[i];
         }
@@ -55,37 +60,3 @@ public class BadStack<T>
     }
 }
 
-public class TestClass{
-public void Main(string[] args)
-{
-    Console.ReadLine();
-    var stack = new BadStack<int>();
-
-    // arr gets Length of 10000
-    for (int i = 0; i < 10000; i++)
-    {
-        stack.Push(i);
-    }
-    
-    // arr gets resized down to size of 5000 where all entries are filled out
-    for (int i = 0; i < 5001; i++)
-    {
-        stack.Pop();
-    }
-    
-    // Continuously push and pop to force resizing for each iteration
-    for (int i = 0; i < 1000; i++)
-    {
-        if (i % 2 == 0)
-        {
-            stack.Push(i);
-        }
-        else
-        {
-            stack.Pop();
-        }
-    }
-
-}
-
-}

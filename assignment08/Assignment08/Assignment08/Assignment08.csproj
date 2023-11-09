@@ -46,8 +46,13 @@
         <Compile Include="virtual\Selsort.cs" />
         <Compile Include="virtual\Square.cs" />
         <Compile Include="virtual\StringConcatSpeed.cs" />
+        <Compile Include="virtual\TestClass.cs" />
     </ItemGroup>
     <ItemGroup>
+      <Content Include="Answers.md" />
+      <Content Include="img.png" />
+      <Content Include="img_1.png" />
+      <Content Include="img_2.png" />
       <Content Include="virtual\CircularQueue.class" />
       <Content Include="virtual\CircularQueue.il" />
       <Content Include="virtual\CircularQueue.java" />
