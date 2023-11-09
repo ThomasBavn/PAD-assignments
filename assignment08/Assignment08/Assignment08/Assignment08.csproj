@@ -40,6 +40,7 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="virtual\BadStack.cs" />
         <Compile Include="virtual\CircularQueue.cs" />
         <Compile Include="virtual\ex13.cs" />
         <Compile Include="virtual\Selsort.cs" />
