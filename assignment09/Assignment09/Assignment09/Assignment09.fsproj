@@ -19,6 +19,7 @@
 
     <ItemGroup>
       <Content Include="ListC\CLex.fsl" />
+      <Content Include="Answers.md" />
     </ItemGroup>
 
 </Project>
