@@ -19,3 +19,15 @@ CAR: Pops the top element of the stack, which should be a pointer to a cons cell
 SETCAR: Pops the top 2 elements of the stack. The first being a value, the second being a pointer to a cons cell. It sets the first element of the cons cell to the popped value.
 
 ### Excercise 10.1.2
+Length: Gets the length the data that the header is attached to.
+Color: Gets the color of the header.
+Paint: Takes a header and a color as an argument, 
+and returns a copy of the header, but with the color set to the color argument.
+
+### Excercise 10.1.3
+The allocate() function is called when a new cons cell is created.
+
+### Excercise 10.1.4
+The collect() function is called if allocate() is called, and there can't be 
+found any space for the cons cell that is to be allocated.
+
