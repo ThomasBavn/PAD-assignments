@@ -43,7 +43,7 @@ A header has the form for32 bits
 ttttttttnnnnnnnnnnnnnnnnnnnnnnnngg
 and for 64 bits
 ttttttttnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnngg
-where 
+where
   - tttttttt is the block tag, all 0 for cons cells
   - nn....nn is the block length (excluding header). 22 bits for 32 bit
              and 54 bits for 64 bit.
@@ -325,7 +325,7 @@ void printStackAndPc(word s[], word bp, word sp, word p[], word pc) {
 
 word *allocate(unsigned int tag, uword length, word s[], word sp);
 
-// The machine: execute the code starting at p[pc] 
+// The machine: execute the code starting at p[pc]
 
 int execcode(word p[], word s[], word iargs[], int iargc, int /* boolean */ trace) {
 
@@ -531,7 +531,7 @@ int execute(int argc, char **argv, int /* boolean */ trace) {
     return res;
 }
 
-// Garbage collection and heap allocation 
+// Garbage collection and heap allocation
 
 word mkheader(uword tag, uword length, unsigned int color) {
 #if defined(ENV32)
