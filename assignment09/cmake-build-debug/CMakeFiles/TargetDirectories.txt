@@ -1,0 +1,3 @@
+C:/Users/alber/OneDrive/Dokumenter/GitHub/PAD-assignments/assignment09/cmake-build-debug/CMakeFiles/assignment09.dir
+C:/Users/alber/OneDrive/Dokumenter/GitHub/PAD-assignments/assignment09/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/alber/OneDrive/Dokumenter/GitHub/PAD-assignments/assignment09/cmake-build-debug/CMakeFiles/rebuild_cache.dir

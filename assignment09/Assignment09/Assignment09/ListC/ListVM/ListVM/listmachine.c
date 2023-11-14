@@ -64,6 +64,7 @@ created when allocating all but the last word of a free block.
 #include <string.h>
 #include <stdio.h>
 #include <time.h>
+#include <stdbool.h>
 
 // Check Windows
 #if _WIN32 || _WIN64
@@ -157,6 +158,7 @@ word *readfile(char *filename);
 // Heap size in words
 
 #define HEAPSIZE 1000
+
 
 word *heap;
 word *afterHeap;
@@ -593,14 +595,74 @@ void initheap() {
     freelist = &heap[0];
 }
 
+
+void mark(word* block) {
+    Paint(*block,Black);
+
+    int len = Length(*block);
+
+    for (int i =1;i<=len;i++){
+        word current= *(block+i);
+
+        if (!IsInt(current) && current !=0) {
+            mark(heap + (current));
+        }
+    }
+
+
+}
+
 void markPhase(word s[], word sp) {
-    printf("marking ...\n");
-    // TODO: Actually mark something
+
+    int counter = 0;
+    while(true){
+        word current= s[counter];
+
+        if (!IsInt(current) && current !=0) {
+            mark(heap + current);
+        }
+
+      if (current==sp){
+          break;
+      }
+
+      counter++;
+   }
 }
 
 void sweepPhase() {
-    printf("sweeping ...\n");
-    // TODO: Actually sweep
+    word *heapPtr = heap;
+    while (heapPtr < afterHeap) {
+
+        int color=Color(*heapPtr);
+
+        int len = Length(*heapPtr);
+
+        if (color==White){
+
+            word *free = freelist;
+            word **prev = &freelist;
+
+            while (free != 0) {
+                if (free>heapPtr){
+                    word *next= prev[1];
+                    free[1] = *next;
+                    prev[1]=free;
+                    break;
+                }
+                prev = (word **) &free[1];
+                free = (word *) free[1];
+            }
+
+        }
+
+        if (color==Black){
+            Paint(*heapPtr,White);
+        }
+
+
+        heapPtr+=len;
+    }
 }
 
 void collect(word s[], word sp) {
