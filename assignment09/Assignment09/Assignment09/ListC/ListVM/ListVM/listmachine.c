@@ -597,7 +597,7 @@ void initheap() {
 
 
 void mark(word* block) {
-    Paint(*block,Black);
+    *block = Paint(*block,Black);
 
     int len = Length(*block);
 
@@ -605,7 +605,7 @@ void mark(word* block) {
         word current= *(block+i);
 
         if (!IsInt(current) && current !=0) {
-            mark(heap + (current));
+            mark((word *)current);
         }
     }
 
@@ -619,10 +619,10 @@ void markPhase(word s[], word sp) {
         word current= s[counter];
 
         if (!IsInt(current) && current !=0) {
-            mark(heap + current);
+            mark((word *) current);
         }
 
-      if (current==sp){
+      if (counter==sp){
           break;
       }
 
@@ -643,7 +643,7 @@ void sweepPhase() {
             word *free = freelist;
             word **prev = &freelist;
 
-            while (free != 0) {
+
                 if (free>heapPtr){
                     word *next= prev[1];
                     free[1] = *next;
@@ -652,12 +652,16 @@ void sweepPhase() {
                 }
                 prev = (word **) &free[1];
                 free = (word *) free[1];
-            }
+
+                if (free==0){
+                    break;
+                }
+
 
         }
 
         if (color==Black){
-            Paint(*heapPtr,White);
+            *heapPtr = Paint(*heapPtr,White);
         }
 
 
