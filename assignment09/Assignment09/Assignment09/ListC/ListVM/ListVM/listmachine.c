@@ -602,15 +602,11 @@ void mark(word *block) {
     if(Color(*block) == Black)
         return;
     *block = Paint(*block, Black);
-
-    printf("painting word black\n");
-
+      
     int len = Length(*block);
 
     for (int i = 1; i <= len; i++) {
         word current = block[i];
-
-        printf("checking for references\n");
 
         if (!IsInt(current) && current != 0) {
 
