@@ -41,3 +41,16 @@ let normalRev = rev exArr
 
 printf "%A " cRev
 printf "%A " normalRev
+printf "%A " (revc exArr (fun v -> v @ v))
+
+let rec revi xs acc =
+    match xs with
+    | [] -> acc
+    | x::xs -> revi xs (x::acc)
+
+
+let accRev = revi exArr []
+
+printf "%A " accRev
+
+
