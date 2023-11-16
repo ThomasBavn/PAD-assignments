@@ -119,7 +119,9 @@ word *readfile(char *filename);
 #endif
 
 #if defined(WIN)
+
 #include "utils_win.c"
+
 #else
 
 #include "utils_unix.c"
@@ -596,16 +598,21 @@ void initheap() {
 }
 
 
-void mark(word* block) {
-    *block = Paint(*block,Black);
+void mark(word *block) {
+    *block = Paint(*block, Black);
+
+    printf("painting word black\n");
 
     int len = Length(*block);
 
-    for (int i =1;i<=len;i++){
-        word current= *(block+i);
+    for (int i = 1; i <= len; i++) {
+        word current = block[i];
 
-        if (!IsInt(current) && current !=0) {
-            mark((word *)current);
+        printf("checking for references\n");
+
+        if (!IsInt(current) && current != 0) {
+
+            mark((word *) current);
         }
     }
 
@@ -615,57 +622,75 @@ void mark(word* block) {
 void markPhase(word s[], word sp) {
 
     int counter = 0;
-    while(true){
-        word current= s[counter];
+    while (true) {
+        word current = s[counter];
 
-        if (!IsInt(current) && current !=0) {
+        if (!IsInt(current) && current != 0) {
             mark((word *) current);
         }
 
-      if (counter==sp){
-          break;
-      }
+        if (counter == sp) {
+            break;
+        }
 
-      counter++;
-   }
+        counter++;
+    }
 }
 
 void sweepPhase() {
     word *heapPtr = heap;
+
     while (heapPtr < afterHeap) {
 
-        int color=Color(*heapPtr);
+        int color = Color(*heapPtr);
 
         int len = Length(*heapPtr);
 
-        if (color==White){
 
+        if (color == White) {
             word *free = freelist;
-            word **prev = &freelist;
+            word *prev = &freelist;
 
 
-                if (free>heapPtr){
-                    word *next= prev[1];
-                    free[1] = *next;
-                    prev[1]=free;
-                    break;
+            *heapPtr= Paint(*heapPtr,Blue);
+
+            if (freelist==0){
+                freelist = heapPtr;
+                freelist[1] = 0;
+
+            } else if (free>heapPtr) {
+                heapPtr[1] = (word)free;
+                freelist= heapPtr;
+
+            } else {
+                while(true){
+                    if (free == 0) {
+                        heapPtr[1] = 0;
+
+                        prev[1] = (word) heapPtr;
+
+                        break;
+                    }
+
+                    if (free > heapPtr) {
+                        heapPtr[1] = (word) free;
+                        prev[1] = (word) heapPtr;
+                        break;
+                    }
+                    prev = free;
+                    free = (word *) free[1];
+
                 }
-                prev = (word **) &free[1];
-                free = (word *) free[1];
 
-                if (free==0){
-                    break;
-                }
-
+            }
 
         }
 
-        if (color==Black){
-            *heapPtr = Paint(*heapPtr,White);
+        if (color == Black) {
+            *heapPtr = Paint(*heapPtr, White);
         }
+        heapPtr += len + 1;
 
-
-        heapPtr+=len;
     }
 }
 
@@ -674,6 +699,7 @@ void collect(word s[], word sp) {
     heapStatistics();
     sweepPhase();
     heapStatistics();
+
 }
 
 word *allocate(unsigned int tag, uword length, word s[], word sp) {
@@ -713,10 +739,10 @@ word *allocate(unsigned int tag, uword length, word s[], word sp) {
 int main(int argc, char **argv) {
 #if defined(ENV64)
     if (sizeof(word) != 8 ||
-    sizeof(word*) != 8 ||
-    sizeof(uword) != 8) {
-      printf("Size of word, word* is not 64 bit, cannot run\n");
-      return -1;
+        sizeof(word *) != 8 ||
+        sizeof(uword) != 8) {
+        printf("Size of word, word* is not 64 bit, cannot run\n");
+        return -1;
     }
 #elif defined(ENV32)
     if (sizeof(word) != 4 ||
