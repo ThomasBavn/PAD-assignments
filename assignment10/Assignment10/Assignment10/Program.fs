@@ -54,3 +54,30 @@ let accRev = revi exArr []
 printf "%A " accRev
 
 
+let rec prodc xs c =
+    match xs with
+    | [] -> c 1
+    | x::xs -> prodc xs (fun res -> c(res * x))
+    
+let cProd = prodc exArr id
+
+printf "%d " cProd
+
+// 11.4: not really optimized
+let rec prodcOptimized xs c =
+    match xs with
+    | [] -> c 1
+    | x::_ when x=0 -> 0
+    | x::xs -> prodcOptimized xs (fun res ->  c(res * x))
+
+// 11.4: actually optimized
+let rec prodi xs acc= 
+    match xs with
+    | [] -> acc
+    | x::_ when x=0 -> 0
+    | x::xr -> prodi xr (acc*x)
+  
+  
+printf "\n %d " (prodcOptimized exArr id)
+printf "\n %d " (prodi exArr 1)
+

@@ -29,3 +29,8 @@ When run, it gives the result `[7; 5; 2]`.
 
 When run with `(fun v -> v @ v)` it gives the result `[7; 5; 2; 7; 5; 2]`
 
+## 11.3
+
+Implementation can be found in `Program.fs`.
+
+
