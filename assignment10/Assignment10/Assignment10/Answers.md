@@ -45,7 +45,18 @@ Implementation can be found in `Program.fs` at line 88.
 
 ### 11.8.ii
 
+Implementation can be found in `Program.fs` at line 98.
+
+### 11.8.iii
+
 Implementation can be found in `Icon.fs` at line 94.
+
+### 11.8.iv
+
+Implementation can be found in `Icon.fs` at line 98.
+
+
+
 
 
 

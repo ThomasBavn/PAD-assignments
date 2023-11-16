@@ -94,6 +94,7 @@ run (Every(Write(Prim("+",Prim("*",FromTo(2,4),(CstI 10)),FromTo(1,2)))))
 
 printfn ""
 
+// 11.8.ii
 run (Write(Prim("<",CstI 50,Prim("*",FromTo(0,50),CstI 7))))
 
 printfn ""
