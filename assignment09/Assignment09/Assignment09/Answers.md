@@ -55,6 +55,6 @@ Used 0 cpu milli-seconds
 ## 10.3
 
 We implemented the optimizations in the `sweepPhase()` at line 650. 
-We actually a slowdown reaching 1ms instead of 0ms on `ex35` and `ex36`, however when we ran `ex30 10000`, we reached a speedup from 7ms down to 5ms
+We actually noticed a slowdown reaching 1ms instead of 0ms on `ex35` and `ex36`, however when we ran `ex30 10000`, we reached a speedup from 7ms down to 5ms.
 
 
