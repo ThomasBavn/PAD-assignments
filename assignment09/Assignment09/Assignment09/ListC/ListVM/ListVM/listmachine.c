@@ -599,6 +599,8 @@ void initheap() {
 
 
 void mark(word *block) {
+    if(Color(*block) == Black)
+        return;
     *block = Paint(*block, Black);
 
     printf("painting word black\n");
