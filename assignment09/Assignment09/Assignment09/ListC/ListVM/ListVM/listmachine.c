@@ -601,6 +601,7 @@ void initheap() {
 void mark(word *block) {
     if(Color(*block) == Black)
         return;
+
     *block = Paint(*block, Black);
       
     int len = Length(*block);
@@ -637,18 +638,20 @@ void markPhase(word s[], word sp) {
 
 void sweepPhase() {
     word *heapPtr = heap;
+    
+    word *prev;
+    word *prevHeap = NULL;
 
     while (heapPtr < afterHeap) {
 
         int color = Color(*heapPtr);
 
         int len = Length(*heapPtr);
-
-
-        if (color == White) {
+        if (prevHeap && Color(*prevHeap) == Blue && color == White){
+            *prevHeap = mkheader(Tag(*prevHeap),len+Length(*prevHeap)+1,Blue);
+        }
+        else if (color == White) {
             word *free = freelist;
-            word *prev = &freelist;
-
 
             *heapPtr= Paint(*heapPtr,Blue);
 
@@ -687,6 +690,8 @@ void sweepPhase() {
         if (color == Black) {
             *heapPtr = Paint(*heapPtr, White);
         }
+
+        prevHeap = heapPtr;
         heapPtr += len + 1;
 
     }
