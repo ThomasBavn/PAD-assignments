@@ -6,13 +6,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Program.fs"/>
         <None Include="prod.fsx" />
         <Compile Include="Cont\Icon.fs" />
         <Compile Include="Cont\Contfun.fs" />
         <Compile Include="Cont\Contimp.fs" />
         <Content Include="Cont\Cont.fsproj" />
         <None Include="fac.fsx" />
+        <Content Include="Answers.md" />
+        <Compile Include="Program.fs" />
     </ItemGroup>
 
 </Project>
