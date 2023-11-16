@@ -61,7 +61,7 @@ let rec prodc xs c =
     
 let cProd = prodc exArr id
 
-printf "%d " cProd
+printfn "%d " cProd
 
 // 11.4: not really optimized
 let rec prodcOptimized xs c =
@@ -78,6 +78,37 @@ let rec prodi xs acc=
     | x::xr -> prodi xr (acc*x)
   
   
-printf "\n %d " (prodcOptimized exArr id)
-printf "\n %d " (prodi exArr 1)
+printfn " %d " (prodcOptimized exArr id)
+printfn "%d " (prodi exArr 1)
 
+
+open Icon;;
+
+// odd 3 to 9
+run (Every(Write(Prim("+",Prim("*",CstI 2,FromTo(1,4)),(CstI 1)))))
+
+// 21 22 31 32 41 42
+// 2..4 *10 + 1..2
+printfn ""
+run (Every(Write(Prim("+",Prim("*",FromTo(2,4),(CstI 10)),FromTo(1,2)))))
+
+printfn ""
+
+run (Write(Prim("<",CstI 50,Prim("*",FromTo(0,50),CstI 7))))
+
+printfn ""
+
+// testing sqr 
+run (Every(Write(Prim1("sqr",FromTo(3,6)))))
+
+
+printfn ""
+
+// testing even
+run (Every(Write(Prim1("even",FromTo(1,7)))))
+
+// testing multiples
+
+printfn ""
+
+run (Every(Write(Prim1("multiples",(CstI 3)))))
