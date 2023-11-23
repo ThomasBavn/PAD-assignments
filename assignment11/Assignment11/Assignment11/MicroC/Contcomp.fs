@@ -103,12 +103,21 @@ let rec addCST i C =
     | (_, IFZERO lab :: C1) -> C1
     | (0, IFNZRO lab :: C1) -> C1
     | (_, IFNZRO lab :: C1) -> addGOTO lab C1
+    
+    | (x,CSTI y::EQ :: C1) when x = y -> addCST 1 C1
+    | (x,CSTI y::EQ :: C1) when x <> y -> addCST 0 C1
+    | (x,CSTI y::LT :: C1) when x < y -> addCST 1 C1
+    | (x,CSTI y::LT :: C1) when x >= y -> addCST 0 C1
+    | (x,CSTI y::SWAP::LT::C1) when x > y -> addCST 1 C1
+    | (x,CSTI y::SWAP::LT::C1) when x < y -> addCST 0 C1
     | _                     -> CSTI i :: C
             
 let rec addIFZERO lab3 C =
     match (lab3,C) with
     | (x, (GOTO lab2)::Label y::C1) when x = y -> IFNZRO lab2::Label x::C1
     | _                     ->  IFZERO lab3:: C
+
+
 (* ------------------------------------------------------------------- *)
 
 (* Simple environment operations *)
