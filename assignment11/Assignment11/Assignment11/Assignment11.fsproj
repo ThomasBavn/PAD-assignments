@@ -21,6 +21,7 @@
         <Compile Include="MicroC\ParseAndContcomp.fs" />
         <ClCompile Include="MicroC\notzerotest.c" />
         <ClCompile Include="MicroC\constconditionaltest.c" />
+        <ClCompile Include="MicroC\ternarytest.c" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 

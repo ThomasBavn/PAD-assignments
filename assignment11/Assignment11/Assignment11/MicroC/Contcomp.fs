@@ -114,7 +114,7 @@ let rec addCST i C =
             
 let rec addIFZERO lab3 C =
     match (lab3,C) with
-    | (x, (GOTO lab2)::Label y::C1) when x = y -> IFNZRO lab2::Label x::C1
+    | (lab3, (GOTO lab2)::Label lab1::C1) when lab1 = lab3 -> IFNZRO lab2::Label lab1::C1
     | _                     ->  IFZERO lab3:: C
 
 
@@ -229,6 +229,7 @@ let rec cStmt stmt (varEnv : varEnv) (funEnv : funEnv) (C : instr list) : instr 
       RET (snd varEnv - 1) :: deadcode C
     | Return (Some e) -> 
       cExpr e varEnv funEnv (RET (snd varEnv) :: deadcode C)
+        
 
 and bStmtordec stmtOrDec varEnv : bstmtordec * varEnv =
     match stmtOrDec with 
@@ -307,6 +308,10 @@ and cExpr (e : expr) (varEnv : varEnv) (funEnv : funEnv) (C : instr list) : inst
            (IFNZRO labtrue 
              :: cExpr e2 varEnv funEnv (addJump jumpend C2))
     | Call(f, es) -> callfun f es varEnv funEnv C
+    | Cond(e1, e2, e3) ->
+        let lab2,evaled2 = addLabel C
+        let lab1,evaled1 = addLabel (cExpr e3 varEnv funEnv evaled2)
+        cExpr e1 varEnv funEnv (addIFZERO lab1 (cExpr e2 varEnv funEnv (addGOTO lab2 (evaled1))))
 
 (* Generate code to access variable, dereference pointer or index array: *)
 
