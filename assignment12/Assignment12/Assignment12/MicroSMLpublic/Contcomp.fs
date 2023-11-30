@@ -7,7 +7,7 @@
 
 *)
 
-module Comp
+module Contcomp
 
 open System.IO
 open Absyn

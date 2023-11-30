@@ -1,10 +1,4 @@
-(* Building the command-line compiler for Micro-SML with parameters
-     * -verbose : print verbose information on stdout
-     * -eval : evaluate the program
-     * -noAlpha : do NO alpha conversion
-     * -opt : compile with optimizations enabled (includes tail calls)
-     * -debug: enambles the debug function in Comp.fs and Contcomp.fs for debugging.
-*)
+module MicroSMLC   
      
 let args = System.Environment.GetCommandLineArgs()
 
