@@ -23,6 +23,7 @@
         <ClCompile Include="MicroC\constconditionaltest.c" />
         <ClCompile Include="MicroC\ternarytest.c" />
         <Compile Include="Program.fs" />
+        <Content Include="answers.md" />
     </ItemGroup>
 
 </Project>
